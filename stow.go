@@ -101,7 +101,7 @@ type Container interface {
 	// PutMultipart creates a new Item with the specified name, and contents provided by an
 	// os.File. Data is sent in parallel where allowed by the backend implementation. Further
 	// for those services that provide it encryptAtRest sets appropriate header information.
-	PutMultipart(name string, file *os.File, encryptAtRest bool, metadata map[string]interface{}) (stow.Item, error)
+	PutMultipart(name string, file *os.File, encryptAtRest bool, metadata map[string]interface{}) (Item, error)
 }
 
 // Item represents an item inside a Container.
