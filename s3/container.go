@@ -153,15 +153,16 @@ func (c *container) Put(name string, r io.Reader, size int64, metadata map[strin
 
 func (c *container) PutMultipart(name string, file *os.File, encryptAtRest bool, metadata map[string]interface{}) (stow.Item, error) {
 	uploader := s3manager.NewUploaderWithClient(c.client)
+
+	// Convert map[string]interface{} to map[string]*string
+	mdPrepped, err := prepMetadata(metadata)
+
 	uploadInputSettings := s3manager.UploadInput{
         Bucket:   aws.String(c.name),
         Key:      aws.String(name),
         Body:     file,
         Metadata: mdPrepped,
-    }
-
-	// Convert map[string]interface{} to map[string]*string
-	mdPrepped, err := prepMetadata(metadata)
+    }	
 	
 	if encryptAtRest {
 		sse_type := "AES256"
