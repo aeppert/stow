@@ -98,7 +98,10 @@ type Container interface {
 	// Put creates a new Item with the specified name, and contents
 	// read from the reader.
 	Put(name string, r io.Reader, size int64, metadata map[string]interface{}) (Item, error)
-	PutMultipart(name string, file *os.File, metadata map[string]interface{}) (Item, error)
+	// PutMultipart creates a new Item with the specified name, and contents provided by an
+	// os.File. Data is sent in parallel where allowed by the backend implementation. Further
+	// for those services that provide it encryptAtRest sets appropriate header information.
+	PutMultipart(name string, file *os.File, encryptAtRest bool, metadata map[string]interface{}) (stow.Item, error)
 }
 
 // Item represents an item inside a Container.

@@ -151,19 +151,24 @@ func (c *container) Put(name string, r io.Reader, size int64, metadata map[strin
 	return newItem, nil
 }
 
-func (c *container) PutMultipart(name string, file *os.File, metadata map[string]interface{}) (stow.Item, error) {
+func (c *container) PutMultipart(name string, file *os.File, encryptAtRest bool, metadata map[string]interface{}) (stow.Item, error) {
 	uploader := s3manager.NewUploaderWithClient(c.client)
-
-	// Convert map[string]interface{} to map[string]*string
-	mdPrepped, err := prepMetadata(metadata)
-	
-    // Perform an upload.
-    result, err := uploader.Upload(&s3manager.UploadInput{
+	uploadInputSettings := s3manager.UploadInput{
         Bucket:   aws.String(c.name),
         Key:      aws.String(name),
         Body:     file,
         Metadata: mdPrepped,
-    })
+    }
+
+	// Convert map[string]interface{} to map[string]*string
+	mdPrepped, err := prepMetadata(metadata)
+	
+	if encryptAtRest {
+		uploadInputSettings.ServerSideEncryption = "AES256"
+	}
+
+    // Perform an upload.
+    result, err := uploader.Upload(&uploadInputSettings)
 
     if err != nil {
 		return nil, errors.Wrap(err, "RemoveItem, deleting object")
