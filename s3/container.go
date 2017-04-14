@@ -164,7 +164,8 @@ func (c *container) PutMultipart(name string, file *os.File, encryptAtRest bool,
 	mdPrepped, err := prepMetadata(metadata)
 	
 	if encryptAtRest {
-		uploadInputSettings.ServerSideEncryption = "AES256"
+		sse_type := "AES256"
+		uploadInputSettings.ServerSideEncryption = &sse_type
 	}
 
     // Perform an upload.
