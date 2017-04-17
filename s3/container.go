@@ -180,7 +180,7 @@ func (c *container) PutMultipart(name string, file *os.File, encryptAtRest bool,
     if err != nil {
     	if multierr, ok := err.(s3manager.MultiUploadFailure); ok {
         	// Process error and its associated uploadID
-        	return nil, errors.Wrapf("Error: Code: %d, Message: %s, UpploadID: %s", multierr.Code(), multierr.Message(), multierr.UploadID())
+        	return nil, errors.Wrapf(err, "Error: Code: %d, Message: %s, UpploadID: %s", multierr.Code(), multierr.Message(), multierr.UploadID())
     	} else {
         	return nil, err
     	}
