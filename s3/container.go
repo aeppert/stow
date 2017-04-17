@@ -156,7 +156,7 @@ func (c *container) PutMultipart(name string, file *os.File, encryptAtRest bool,
     	u.PartSize = 5 * 1024 * 1024, // 5MB per part
     	u.MaxUploadParts = 100, 
     	u.Concurrency = 10,
-    	u.LeavePartsOnError = false
+    	u.LeavePartsOnError = false,
 	})
 
 	// Convert map[string]interface{} to map[string]*string
