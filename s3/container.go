@@ -153,9 +153,9 @@ func (c *container) Put(name string, r io.Reader, size int64, metadata map[strin
 
 func (c *container) PutMultipart(name string, file *os.File, encryptAtRest bool, metadata map[string]interface{}) (stow.Item, error) {
 	uploader := s3manager.NewUploaderWithClient(c.client, func(u *s3manager.Uploader) {
-    	u.PartSize = 5 * 1024 * 1024 // 5MB per part
+    	u.PartSize = 10 * 1024 * 1024 // 10MB per part
     	u.MaxUploadParts = 100 
-    	u.Concurrency = 10
+    	u.Concurrency = 20
     	u.LeavePartsOnError = false
 	})
 
