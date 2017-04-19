@@ -8,8 +8,8 @@ import (
 	"testing"
 
 	"github.com/cheekybits/is"
-	"github.com/graymeta/stow"
-	"github.com/graymeta/stow/test"
+	"github.com/aeppert/stow"
+	"github.com/aeppert/stow/test"
 )
 
 var cfgUnmetered = stow.ConfigMap{

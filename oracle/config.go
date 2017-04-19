@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/graymeta/stow"
+	"github.com/aeppert/stow"
 	"github.com/ncw/swift"
 )
 

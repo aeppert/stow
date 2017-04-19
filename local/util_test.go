@@ -8,8 +8,8 @@ import (
 	"testing"
 
 	"github.com/cheekybits/is"
-	"github.com/graymeta/stow"
-	"github.com/graymeta/stow/local"
+	"github.com/aeppert/stow"
+	"github.com/aeppert/stow/local"
 )
 
 func setup() (string, func() error, error) {

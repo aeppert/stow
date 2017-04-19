@@ -10,7 +10,7 @@ container:
 	docker build --no-cache -t builder-stow test/
 
 runcontainer:
-	docker run -v $(WORKSPACE):/mnt/src/github.com/graymeta/stow builder-stow
+	docker run -v $(WORKSPACE):/mnt/src/github.com/aeppert/stow builder-stow
 
 deps:
 	go get github.com/tebeka/go2xunit

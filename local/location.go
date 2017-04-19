@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/graymeta/stow"
+	"github.com/aeppert/stow"
 )
 
 type location struct {
